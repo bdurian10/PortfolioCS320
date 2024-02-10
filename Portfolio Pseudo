@@ -1,0 +1,150 @@
+Class Automobile:
+    private string make
+    private string model
+    private string color
+    private int year
+    private int mileage
+
+    // Default constructor
+    Function Automobile():
+        // Initialize with default values, null for strings and -1 for ints
+        this.make = null
+        this.model = null
+        this.color = null
+        this.year = -1
+        this.mileage = 0
+        
+    // Parameterized constructor
+    Function Automobile(make, model, color, year, mileage):
+    	try:
+    		if year < 1885: //According to Mercedes-Benz, the first modern automobile was made in 1885.
+    			throw new Exception("Invalid Year.") 
+			if mileage < 0: //Mileage cannot be negative
+				throw new Exception("Invalid Mileage.")
+	        this.make = make
+	        this.model = model
+	        this.color = color
+	        this.year = year
+	        this.mileage = mileage
+        catch Exception as e:
+        	Println("Error creating Automobile: " + e.getMessage()")
+
+    // Add a new vehicle method: allows the user to provide the parameters for a new vehicle if the private variables are cleared.
+    Function addNewVehicle(make, model, color, year, mileage):
+        try:
+            // Logic to add the vehicle to the inventory
+            if any private variables are not set to default values:
+            	throw new Exception("Remove current vehicle before attempting to add another.")
+            this.make = make
+            this.model = model
+            this.color = color
+            this.year = year
+            this.mileage = mileage
+            return "Vehicle added successfully."
+        catch Exception as e:
+            return "Failed to add vehicle: " + e.getMessage()
+
+    // List vehicle information method
+    Function String[] listVehicleInformation():
+        try:
+            // Return vehicle info as a String array
+            return {"Make: " + make, "Model: " + model, "Color: " + color, "Year: " + year, "Mileage: " + mileage}
+        catch Exception as e:
+            return {"Failed to retrieve vehicle information: " + e.getMessage()}
+
+    // Remove a vehicle method
+    Function removeVehicle():
+        try:
+            //Set private variables to default values
+            this.make = null
+            this.model = null
+            this.color = null
+            this.year = -1
+            this.mileage = -1
+            return "Vehicle removed successfully."
+        catch Exception as e:
+            return "Failed to remove vehicle: " + e.getMessage()
+
+    // Update vehicle attributes method
+    Function updateVehicleAttributes(make, model, color, year, mileage):
+        try:
+        	//Validate year and mileage
+    		if year < 1885: //According to Mercedes-Benz, the first modern automobile was made in 1885.
+    			throw new Exception("Invalid Year.") 
+			if mileage < 0: //Mileage cannot be negative
+				throw new Exception("Invalid Mileage.")
+            // Update vehilce attributes
+            this.make = make
+            this.model = model
+            this.color = color
+            this.year = year
+            this.mileage = mileage
+            return "Vehicle attributes updated successfully."
+        catch Exception as e:
+            return "Failed to update vehicle attributes: " + e.getMessage()
+
+
+// Main program
+Function main():
+    try:
+        // Create an instance of the Automobile class with a parameterized constructor
+        Automobile myCar = new Automobile("Toyota", "Camry", "Blue", 2022, 5000)
+
+        // Call the method to list the values
+        String[] vehicleInfo = myCar.listVehicleInformation()
+        For each info in vehicleInfo:
+            Print(info)
+
+        // Call the remove vehicle method to clear the variables
+        String removeResult = myCar.removeVehicle()
+        Print(removeResult)
+
+        // Add a new vehicle
+        String addResult = myCar.addNewVehicle("Honda", "Accord", "Red", 2023, 8000)
+        Print(addResult)
+
+        // Call the list method and print the new vehicle information to the screen
+        String[] newVehicleInfo = myCar.listVehicleInformation()
+        For each info in newVehicleInfo:
+            Print(info)
+
+        // Update the vehicle
+        String updateResult = myCar.updateVehicleAttributes("Honda", "Accord", "Green", 2023, 9000)
+        Print(updateResult)
+
+        // Call the listing method and print the information to the screen
+        String[] updatedVehicleInfo = myCar.listVehicleInformation()
+        For each info in updatedVehicleInfo:
+            Print(info)
+
+        // Display a message asking if the user wants to print the information to a file (Y or N)
+        Print("Do you want to print the information to a file? (Y/N)")
+        String response = ReadUserInput()
+
+        If response.equalsIgnoreCase("Y") Then:
+            // Print the file to a predefined location (e.g., C:\Temp\Autos.txt)
+            PrintToFile(updatedVehicleInfo)
+        Else:
+            // Indicate that a file will not be printed
+            Print("File will not be printed.")
+
+    catch Exception as e:
+        Print("An error occurred: " + e.getMessage())
+
+// Method to print information to a file
+Function printToFile(vehicleInfo):
+    try:
+        File writer = new FileWriter("C:\\Temp\\Autos.txt")
+        For each info in vehicleInfo:
+            writer.write(info + "\n")
+        Print("File printed successfully.")
+    catch IOException as e:
+        Print("Failed to print file: " + e.getMessage())
+
+// Helper method to read user input
+Function ReadUserInput():
+    Scanner scanner = new Scanner(System.in)
+    return scanner.nextLine().trim()
+
+// Start the main program
+main()
